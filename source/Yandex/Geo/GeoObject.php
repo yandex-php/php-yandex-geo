@@ -59,7 +59,7 @@ class GeoObject
     }
 
     /**
-     * Адресная строка
+     * Полный адрес
      * @return string|null
      */
     public function getAddress()
@@ -67,6 +67,105 @@ class GeoObject
         $result = null;
         if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['text'])) {
             $result = $this->_data['metaDataProperty']['GeocoderMetaData']['text'];
+        }
+        return $result;
+    }
+
+    /**
+     * Страна
+     * @return string|null
+     */
+    public function getCountry()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryName'];
+        }
+        return $result;
+    }
+
+    /**
+     * Код страны
+     * @return string|null
+     */
+    public function getCountryCode()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryNameCode'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryNameCode'];
+        }
+        return $result;
+    }
+
+    /**
+     * Административный округ
+     * @return string|null
+     */
+    public function getAdministrativeAreaName()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'];
+        }
+        return $result;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSubAdministrativeAreaName()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'];
+        }
+        return $result;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLocalityName()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
+        }
+        return $result;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDependentLocalityName()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['DependentLocalityName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['DependentLocalityName'];
+        }
+        return $result;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getThoroughfareName()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['ThoroughfareName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['ThoroughfareName'];
+        }
+        return $result;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPremiseNumber()
+    {
+        $result = null;
+        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['Premise']['PremiseNumber'])) {
+            $result = (int)$this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['Premise']['PremiseNumber'];
         }
         return $result;
     }
