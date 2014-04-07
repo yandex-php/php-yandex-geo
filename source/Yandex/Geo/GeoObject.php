@@ -131,6 +131,9 @@ class GeoObject
         if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'])) {
             $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
         }
+        elseif(isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['Locality']['LocalityName'])) {
+            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['Locality']['LocalityName'];
+        }
         return $result;
     }
 
