@@ -218,7 +218,7 @@ class Api
      * @param string $token
      * @return self
      */
-    public function seToken($token)
+    public function setToken($token)
     {
         $this->_filters['key'] = (string)$token;
         return $this;
