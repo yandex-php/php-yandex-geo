@@ -38,7 +38,7 @@ class GeoObject
     {
         $result = null;
         if (isset($this->_data['Point']['pos'])) {
-            list($latitude,) = explode(' ', $this->_data['Point']['pos']);
+            list(, $latitude) = explode(' ', $this->_data['Point']['pos']);
             $result = (float)$latitude;
         }
         return $result;
@@ -52,7 +52,7 @@ class GeoObject
     {
         $result = null;
         if (isset($this->_data['Point']['pos'])) {
-            list(, $longitude) = explode(' ', $this->_data['Point']['pos']);
+            list($longitude, ) = explode(' ', $this->_data['Point']['pos']);
             $result = (float)$longitude;
         }
         return $result;
