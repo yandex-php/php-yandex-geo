@@ -10,10 +10,25 @@ namespace Yandex\Geo;
 class GeoObject
 {
     protected $_data;
+    protected $_rawData;
 
-    public function __construct(array $data)
+    public function __construct(array $rawData)
     {
+        $data = array(
+            'Address' => $rawData['metaDataProperty']['GeocoderMetaData']['text'],
+        );
+        array_walk_recursive($rawData, function($value, $key) use(&$data) {
+            if (in_array($key, array('CountryName', 'CountryNameCode', 'AdministrativeAreaName', 'SubAdministrativeArea', 'LocalityName', 'DependentLocalityName', 'ThoroughfareName', 'PremiseNumber'))) {
+                $data[$key] = $value;
+            }
+        });
+        if (isset($rawData['Point']['pos'])) {
+            $pos = explode(' ', $rawData['Point']['pos']);
+            $data['Longitude'] = (float)$pos[0];
+            $data['Latitude'] = (float)$pos[1];
+        }
         $this->_data = $data;
+        $this->_rawData = $rawData;
     }
 
     public function __sleep()
@@ -22,7 +37,16 @@ class GeoObject
     }
 
     /**
-     * Исходные данные
+     * Необработанные данные
+     * @return array
+     */
+    public function getRawData()
+    {
+        return $this->_rawData;
+    }
+    
+    /**
+     * Обработанные данные
      * @return array
      */
     public function getData()
@@ -36,12 +60,7 @@ class GeoObject
      */
     public function getLatitude()
     {
-        $result = null;
-        if (isset($this->_data['Point']['pos'])) {
-            list($latitude,) = explode(' ', $this->_data['Point']['pos']);
-            $result = (float)$latitude;
-        }
-        return $result;
+        return isset($this->_data['Latitude']) ? $this->_data['Latitude'] : null;
     }
 
     /**
@@ -50,12 +69,7 @@ class GeoObject
      */
     public function getLongitude()
     {
-        $result = null;
-        if (isset($this->_data['Point']['pos'])) {
-            list(, $longitude) = explode(' ', $this->_data['Point']['pos']);
-            $result = (float)$longitude;
-        }
-        return $result;
+        return isset($this->_data['Longitude']) ? $this->_data['Longitude'] : null;
     }
 
     /**
@@ -64,11 +78,7 @@ class GeoObject
      */
     public function getAddress()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['text'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['text'];
-        }
-        return $result;
+        return isset($this->_data['Address']) ? $this->_data['Address'] : null;
     }
 
     /**
@@ -77,11 +87,7 @@ class GeoObject
      */
     public function getCountry()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryName'];
-        }
-        return $result;
+        return isset($this->_data['CountryName']) ? $this->_data['CountryName'] : null;
     }
 
     /**
@@ -90,11 +96,7 @@ class GeoObject
      */
     public function getCountryCode()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryNameCode'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['CountryNameCode'];
-        }
-        return $result;
+        return isset($this->_data['CountryNameCode']) ? $this->_data['CountryNameCode'] : null;
     }
 
     /**
@@ -103,11 +105,7 @@ class GeoObject
      */
     public function getAdministrativeAreaName()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'];
-        }
-        return $result;
+        return isset($this->_data['AdministrativeAreaName']) ? $this->_data['AdministrativeAreaName'] : null;
     }
 
     /**
@@ -115,11 +113,7 @@ class GeoObject
      */
     public function getSubAdministrativeAreaName()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'];
-        }
-        return $result;
+        return isset($this->_data['SubAdministrativeAreaName']) ? $this->_data['SubAdministrativeAreaName'] : null;
     }
 
     /**
@@ -127,14 +121,7 @@ class GeoObject
      */
     public function getLocalityName()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
-        }
-        elseif(isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['Locality']['LocalityName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['Locality']['LocalityName'];
-        }
-        return $result;
+        return isset($this->_data['LocalityName']) ? $this->_data['LocalityName'] : null;
     }
 
     /**
@@ -142,11 +129,7 @@ class GeoObject
      */
     public function getDependentLocalityName()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['DependentLocalityName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['DependentLocalityName'];
-        }
-        return $result;
+        return isset($this->_data['DependentLocalityName']) ? $this->_data['DependentLocalityName'] : null;
     }
 
     /**
@@ -154,11 +137,7 @@ class GeoObject
      */
     public function getThoroughfareName()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['ThoroughfareName'])) {
-            $result = $this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['ThoroughfareName'];
-        }
-        return $result;
+        return isset($this->_data['ThoroughfareName']) ? $this->_data['ThoroughfareName'] : null;
     }
 
     /**
@@ -166,10 +145,6 @@ class GeoObject
      */
     public function getPremiseNumber()
     {
-        $result = null;
-        if (isset($this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['Premise']['PremiseNumber'])) {
-            $result = (int)$this->_data['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['DependentLocality']['Thoroughfare']['Premise']['PremiseNumber'];
-        }
-        return $result;
+        return isset($this->_data['PremiseNumber']) ? $this->_data['PremiseNumber'] : null;
     }
 }
