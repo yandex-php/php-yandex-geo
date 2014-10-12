@@ -20,8 +20,8 @@
         }
     },
     "support": {
-        "source": "https://github.com/dmkuznetsov/php-yandex-geo",
-        "issues": "https://github.com/dmkuznetsov/php-yandex-geo/issues",
-        "wiki": "https://github.com/dmkuznetsov/php-yandex-geo"
+        "source": "https://github.com/yandex-php/php-yandex-geo",
+        "issues": "https://github.com/yandex-php/php-yandex-geo/issues",
+        "wiki": "https://github.com/yandex-php/php-yandex-geo"
     }
 }
