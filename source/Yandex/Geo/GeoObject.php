@@ -18,7 +18,7 @@ class GeoObject
             'Address' => $rawData['metaDataProperty']['GeocoderMetaData']['text'],
         );
         array_walk_recursive($rawData, function($value, $key) use(&$data) {
-            if (in_array($key, array('CountryName', 'CountryNameCode', 'AdministrativeAreaName', 'SubAdministrativeArea', 'LocalityName', 'DependentLocalityName', 'ThoroughfareName', 'PremiseNumber'))) {
+            if (in_array($key, array('CountryName', 'CountryNameCode', 'AdministrativeAreaName', 'SubAdministrativeAreaName', 'LocalityName', 'DependentLocalityName', 'ThoroughfareName', 'PremiseNumber'))) {
                 $data[$key] = $value;
             }
         });
@@ -109,6 +109,7 @@ class GeoObject
     }
 
     /**
+     * Область/край
      * @return string|null
      */
     public function getSubAdministrativeAreaName()
@@ -117,6 +118,7 @@ class GeoObject
     }
 
     /**
+     * Населенный пункт
      * @return string|null
      */
     public function getLocalityName()
@@ -133,6 +135,7 @@ class GeoObject
     }
 
     /**
+     * Улица
      * @return string|null
      */
     public function getThoroughfareName()
@@ -141,7 +144,8 @@ class GeoObject
     }
 
     /**
-     * @return int|null
+     * Номер дома
+     * @return string|null
      */
     public function getPremiseNumber()
     {
