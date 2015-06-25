@@ -58,7 +58,7 @@ class Api
 
     public function load()
     {
-        $apiUrl = sprintf('http://geocode-maps.yandex.ru/%s/?%s', $this->_version, http_build_query($this->_filters));
+        $apiUrl = sprintf('https://geocode-maps.yandex.ru/%s/?%s', $this->_version, http_build_query($this->_filters));
         $curl = curl_init($apiUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_HTTPGET, 1);
