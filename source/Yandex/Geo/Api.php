@@ -4,7 +4,6 @@ namespace Yandex\Geo;
 /**
  * Class Api
  * @package Yandex\Geo
- * @author Dmitry Kuznetsov <kuznetsov2d@gmail.com>
  * @license The MIT License (MIT)
  * @see http://api.yandex.ru/maps/doc/geocoder/desc/concepts/About.xml
  */
@@ -56,12 +55,23 @@ class Api
         $this->clear();
     }
 
-    public function load()
+    /**
+     * @param array $options Curl options
+     * @return $this
+     * @throws Exception
+     * @throws Exception\CurlError
+     * @throws Exception\ServerError
+     */
+    public function load(array $options = [])
     {
         $apiUrl = sprintf('https://geocode-maps.yandex.ru/%s/?%s', $this->_version, http_build_query($this->_filters));
         $curl = curl_init($apiUrl);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_HTTPGET, 1);
+        $options += array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_HTTPGET => 1,
+            CURLOPT_FOLLOWLOCATION => 1,
+        );
+        curl_setopt_array($curl, $options);
         $data = curl_exec($curl);
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if (curl_errno($curl)) {
@@ -80,6 +90,7 @@ class Api
         }
 
         $this->_response = new \Yandex\Geo\Response($data);
+
         return $this;
     }
 

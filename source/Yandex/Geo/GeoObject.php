@@ -4,11 +4,19 @@ namespace Yandex\Geo;
 /**
  * Class GeoObject
  * @package Yandex\Geo
- * @author Dmitry Kuznetsov <kuznetsov2d@gmail.com>
  * @license The MIT License (MIT)
  */
 class GeoObject
 {
+    protected $_addressHierarchy = [
+        'Country' => array('AdministrativeArea'),
+        'AdministrativeArea' => array('SubAdministrativeArea'),
+        'SubAdministrativeArea' => array('Locality'),
+        'Locality' => array('DependentLocality', 'Thoroughfare'),
+        'DependentLocality' => array('DependentLocality', 'Thoroughfare'),
+        'Thoroughfare' => array('Premise'),
+        'Premise' => array(),
+    ];
     protected $_data;
     protected $_rawData;
 
@@ -17,11 +25,26 @@ class GeoObject
         $data = array(
             'Address' => $rawData['metaDataProperty']['GeocoderMetaData']['text'],
         );
-        array_walk_recursive($rawData, function($value, $key) use(&$data) {
-            if (in_array($key, array('CountryName', 'CountryNameCode', 'AdministrativeAreaName', 'SubAdministrativeAreaName', 'LocalityName', 'DependentLocalityName', 'ThoroughfareName', 'PremiseNumber'))) {
-                $data[$key] = $value;
+        array_walk_recursive(
+            $rawData,
+            function ($value, $key) use (&$data) {
+                if (in_array(
+                    $key,
+                    array(
+                        'CountryName',
+                        'CountryNameCode',
+                        'AdministrativeAreaName',
+                        'SubAdministrativeAreaName',
+                        'LocalityName',
+                        'DependentLocalityName',
+                        'ThoroughfareName',
+                        'PremiseNumber',
+                    )
+                )) {
+                    $data[$key] = $value;
+                }
             }
-        });
+        );
         if (isset($rawData['Point']['pos'])) {
             $pos = explode(' ', $rawData['Point']['pos']);
             $data['Longitude'] = (float)$pos[0];
@@ -44,7 +67,7 @@ class GeoObject
     {
         return $this->_rawData;
     }
-    
+
     /**
      * Обработанные данные
      * @return array
@@ -150,5 +173,45 @@ class GeoObject
     public function getPremiseNumber()
     {
         return isset($this->_data['PremiseNumber']) ? $this->_data['PremiseNumber'] : null;
+    }
+
+    /**
+     * Полный адрес
+     * @return array
+     */
+    public function getFullAddressParts()
+    {
+        return array_unique(
+            $this->_parseLevel(
+                $this->_rawData['metaDataProperty']['GeocoderMetaData']['AddressDetails']['Country'],
+                'Country'
+            )
+        );
+    }
+
+    /**
+     *
+     * @param array $level
+     * @param String $levelName
+     * @param array $address
+     * @return array
+     */
+    protected function _parseLevel(array $level, $levelName, &$address = [])
+    {
+        if (!isset($this->_addressHierarchy[$levelName])) {
+            return;
+        }
+
+        $nameProp = $levelName === 'Premise' ? 'PremiseNumber' : $levelName.'Name';
+        $address[] = $level[$nameProp];
+
+        foreach ($this->_addressHierarchy[$levelName] as $child) {
+            if (!isset($level[$child])) {
+                continue;
+            }
+            $this->_parseLevel($level[$child], $child, $address);
+        }
+
+        return $address;
     }
 }

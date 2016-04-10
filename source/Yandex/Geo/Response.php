@@ -4,7 +4,6 @@ namespace Yandex\Geo;
 /**
  * Class Response
  * @package Yandex\Geo
- * @author Dmitry Kuznetsov <kuznetsov2d@gmail.com>
  * @license The MIT License (MIT)
  */
 class Response
@@ -43,6 +42,19 @@ class Response
     public function getList()
     {
         return $this->_list;
+    }
+
+    /**
+     * @return null|GeoObject
+     */
+    public function getFirst()
+    {
+        $result = null;
+        if (count($this->_list)) {
+            $result = $this->_list[0];
+        }
+
+        return $result;
     }
 
     /**
