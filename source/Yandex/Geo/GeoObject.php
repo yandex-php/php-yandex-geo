@@ -24,6 +24,7 @@ class GeoObject
     {
         $data = array(
             'Address' => $rawData['metaDataProperty']['GeocoderMetaData']['text'],
+            'Kind' => $rawData['metaDataProperty']['GeocoderMetaData']['kind']
         );
         array_walk_recursive(
             $rawData,
@@ -102,6 +103,15 @@ class GeoObject
     public function getAddress()
     {
         return isset($this->_data['Address']) ? $this->_data['Address'] : null;
+    }
+
+    /**
+     * Тип
+     * @return string|null
+     */
+    public function getKind()
+    {
+        return isset($this->_data['Kind']) ? $this->_data['Kind'] : null;
     }
 
     /**
