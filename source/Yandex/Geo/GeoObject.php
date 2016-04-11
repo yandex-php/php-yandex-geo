@@ -10,7 +10,7 @@ class GeoObject
 {
     protected $_addressHierarchy = [
         'Country' => array('AdministrativeArea'),
-        'AdministrativeArea' => array('SubAdministrativeArea'),
+        'AdministrativeArea' => array('SubAdministrativeArea', 'Locality'),
         'SubAdministrativeArea' => array('Locality'),
         'Locality' => array('DependentLocality', 'Thoroughfare'),
         'DependentLocality' => array('DependentLocality', 'Thoroughfare'),
