@@ -213,7 +213,9 @@ class GeoObject
         }
 
         $nameProp = $levelName === 'Premise' ? 'PremiseNumber' : $levelName.'Name';
-        $address[] = $level[$nameProp];
+        if (isset($level[$nameProp])) {
+            $address[] = $level[$nameProp];
+        }
 
         foreach ($this->_addressHierarchy[$levelName] as $child) {
             if (!isset($level[$child])) {
