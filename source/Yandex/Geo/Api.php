@@ -132,7 +132,7 @@ class Api
     {
         $longitude = (float)$longitude;
         $latitude = (float)$latitude;
-        $this->_filters['geocode'] = sprintf('%f,%f', $longitude, $latitude);
+        $this->_filters['geocode'] = sprintf('%F,%F', $longitude, $latitude);
         return $this;
     }
 
