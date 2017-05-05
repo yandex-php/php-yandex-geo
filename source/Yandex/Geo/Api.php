@@ -75,8 +75,9 @@ class Api
         $data = curl_exec($curl);
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if (curl_errno($curl)) {
+            $error = curl_error($curl);
             curl_close($curl);
-            throw new \Yandex\Geo\Exception\CurlError(curl_error($curl));
+            throw new \Yandex\Geo\Exception\CurlError($error);
         }
         curl_close($curl);
         if (in_array($code, array(500, 502))) {
