@@ -43,15 +43,35 @@ class Api
      * @var \Yandex\Geo\Response|null
      */
     protected $_response;
+    /**
+     *
+     * API KEY
+     *
+     * @var STRING
+     *
+     */
+    private $api_key = '';
+    /**
+     *
+     * LANGUAGE RESPONSE
+     *
+     * @var STRING
+     *
+     */
+    private $language = '';
 
     /**
      * @param null|string $version
      */
     public function __construct($version = null)
     {
+
         if (!empty($version)) {
-            $this->_version = (string)$version;
+
+            $this->_version = (string) $version;
+
         }
+
         $this->clear();
     }
 
@@ -65,10 +85,10 @@ class Api
     public function load(array $options = [])
     {
         $apiUrl = sprintf('https://geocode-maps.yandex.ru/%s/?%s', $this->_version, http_build_query($this->_filters));
-        $curl = curl_init($apiUrl);
+        $curl   = curl_init($apiUrl);
         $options += array(
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_HTTPGET => 1,
+            CURLOPT_HTTPGET        => 1,
             CURLOPT_FOLLOWLOCATION => 1,
         );
         curl_setopt_array($curl, $options);
@@ -110,7 +130,7 @@ class Api
     public function clear()
     {
         $this->_filters = array(
-            'format' => 'json'
+            'format' => 'json',
         );
         // указываем явно значения по-умолчанию
         $this
@@ -131,8 +151,8 @@ class Api
      */
     public function setPoint($longitude, $latitude)
     {
-        $longitude = (float)$longitude;
-        $latitude = (float)$latitude;
+        $longitude                 = (float) $longitude;
+        $latitude                  = (float) $latitude;
         $this->_filters['geocode'] = sprintf('%F,%F', $longitude, $latitude);
         return $this;
     }
@@ -147,12 +167,12 @@ class Api
      */
     public function setArea($lengthLng, $lengthLat, $longitude = null, $latitude = null)
     {
-        $lengthLng = (float)$lengthLng;
-        $lengthLat = (float)$lengthLat;
+        $lengthLng             = (float) $lengthLng;
+        $lengthLat             = (float) $lengthLat;
         $this->_filters['spn'] = sprintf('%f,%f', $lengthLng, $lengthLat);
         if (!empty($longitude) && !empty($latitude)) {
-            $longitude = (float)$longitude;
-            $latitude = (float)$latitude;
+            $longitude            = (float) $longitude;
+            $latitude             = (float) $latitude;
             $this->_filters['ll'] = sprintf('%f,%f', $longitude, $latitude);
         }
         return $this;
@@ -176,7 +196,7 @@ class Api
      */
     public function setQuery($query)
     {
-        $this->_filters['geocode'] = (string)$query;
+        $this->_filters['geocode'] = (string) $query;
         return $this;
     }
 
@@ -187,7 +207,7 @@ class Api
      */
     public function setKind($kind)
     {
-        $this->_filters['kind'] = (string)$kind;
+        $this->_filters['kind'] = (string) $kind;
         return $this;
     }
 
@@ -198,7 +218,7 @@ class Api
      */
     public function setLimit($limit)
     {
-        $this->_filters['results'] = (int)$limit;
+        $this->_filters['results'] = (int) $limit;
         return $this;
     }
 
@@ -209,7 +229,7 @@ class Api
      */
     public function setOffset($offset)
     {
-        $this->_filters['skip'] = (int)$offset;
+        $this->_filters['skip'] = (int) $offset;
         return $this;
     }
 
@@ -220,7 +240,7 @@ class Api
      */
     public function setLang($lang)
     {
-        $this->_filters['lang'] = (string)$lang;
+        $this->_filters['lang'] = (string) $lang;
         return $this;
     }
 
@@ -232,7 +252,7 @@ class Api
      */
     public function setToken($token)
     {
-        $this->_filters['key'] = (string)$token;
+        $this->_filters['key'] = (string) $token;
         return $this;
     }
 }
