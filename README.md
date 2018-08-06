@@ -24,4 +24,5 @@ Add then alias YaGeo adding its facade to the aliases array in the same file:
 
 ## Configuration
 
+
 ## Usage
