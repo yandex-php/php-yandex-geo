@@ -76,6 +76,20 @@ class Api
     }
 
     /**
+     *
+     * MAKE
+     *
+     * @return OBJECT
+     *
+     */
+    public static function make()
+    {
+
+        return new static;
+
+    }
+
+    /**
      * @param array $options Curl options
      * @return $this
      * @throws Exception

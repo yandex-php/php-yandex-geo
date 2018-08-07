@@ -1,9 +1,9 @@
 <?php
-namespace Jcf\Geocode\Facades;
+namespace Yandex\Geo\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Geocode extends Facade
+class YaGeo extends Facade
 {
     /**
      * Get the registered name of the component.
