@@ -1,7 +1,11 @@
 <?php
 namespace Yandex\Geo;
 
+use Illuminate\Contracts\Container\Container as Application;
+use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Application as LumenApplication;
+use Yandex\Geo\Api;
 
 class YandexServiceProvider extends ServiceProvider
 {
@@ -20,7 +24,27 @@ class YandexServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $source = dirname(__DIR__) . '/../../config/yandex-geocoding.php';
+
+        $this->setupConfig(
+
+            $this->app
+
+        );
+
+    }
+    /**
+     *
+     * Setup the config
+     *
+     * @param \Illuminate\Contracts\Container\Container $app
+     *
+     * @return void
+     *
+     */
+    protected function setupConfig(Application $app)
+    {
+
+        $source = __DIR__ . '/config/yandex-geocoding.php';
 
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
 
@@ -42,26 +66,37 @@ class YandexServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        $this->registerManager(
+
+            $this->app
+
+        );
+
+    }
+    /**
+     *
+     * Registrer the manager class
+     *
+     * @param \Illuminate\Contracts\Container\Container $app
+     *
+     * @return void
+     *
+     */
+    protected function registerManager(Application $app)
+    {
+
         $this->app->singleton('yandex-geocoding', function ($app) {
 
-            return new \Yandex\Geo\Api;
+            $config = (array) $app['config']['yandex-geocoding'];
+
+            return (new Api($config))->setContainer($app);
 
         });
 
-        if ($this->app instanceof LaravelApplication) {
-
-            $this->app->booting(function () {
-
-                $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-
-                $loader->alias('YaGeo', 'Yandex\Geo\Facades\YaGeo');
-
-            });
-
-        }
+        $app->alias('YaGeo', Api::class);
 
     }
-
     /**
      * Get the services provided by the provider.
      *
@@ -70,7 +105,7 @@ class YandexServiceProvider extends ServiceProvider
     public function provides()
     {
 
-        return array();
+        return ['yandex-geocoding', Api::class];
 
     }
 

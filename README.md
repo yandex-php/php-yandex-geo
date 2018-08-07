@@ -36,11 +36,9 @@ $app->register(Yandex\Geo\YandexServiceProvider::class);
 ## Usage
 
 ```php
-
 dd(
 
     \YaGeo::make()->setQuery('Киев')->load()
 
 );
-
 ```
