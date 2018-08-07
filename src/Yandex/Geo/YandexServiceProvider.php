@@ -54,7 +54,7 @@ class YandexServiceProvider extends ServiceProvider
 
                 $loader = \Illuminate\Foundation\AliasLoader::getInstance();
 
-                $loader->alias('YaGeo', 'Yandex\Geo\Facades\Geocode');
+                $loader->alias('YaGeo', 'Yandex\Geo\Facades\YaGeo');
 
             });
 

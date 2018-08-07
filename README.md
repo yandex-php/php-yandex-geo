@@ -22,6 +22,14 @@ Add then alias YaGeo adding its facade to the aliases array in the same file:
 'YaGeo' => Yandex\Geo\YandexServiceProvider::class
 ```
 
+### Lumen install
+
+After updating composer, register the service provider in bootstrap/app.php
+
+```php
+$app->register(Yandex\Geo\YandexServiceProvider::class);
+```
+
 ## Configuration
 
 
