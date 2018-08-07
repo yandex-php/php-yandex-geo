@@ -3,7 +3,7 @@ namespace Yandex\Geo;
 
 use Illuminate\Support\ServiceProvider;
 
-class GeocodeServiceProvider extends ServiceProvider
+class YandexServiceProvider extends ServiceProvider
 {
 
     /**

@@ -22,8 +22,8 @@ class ComposerStaticInit003d71c5160f74158295f259a3afac43
         'Yandex\\Geo\\Exception\\CurlError' => __DIR__ . '/../..' . '/src/Yandex/Geo/Exception/CurlError.php',
         'Yandex\\Geo\\Exception\\ServerError' => __DIR__ . '/../..' . '/src/Yandex/Geo/Exception/ServerError.php',
         'Yandex\\Geo\\GeoObject' => __DIR__ . '/../..' . '/src/Yandex/Geo/GeoObject.php',
-        'Yandex\\Geo\\GeocodeServiceProvider' => __DIR__ . '/../..' . '/src/Yandex/Geo/YandexServiceProvider.php',
         'Yandex\\Geo\\Response' => __DIR__ . '/../..' . '/src/Yandex/Geo/Response.php',
+        'Yandex\\Geo\\YandexServiceProvider' => __DIR__ . '/../..' . '/src/Yandex/Geo/YandexServiceProvider.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

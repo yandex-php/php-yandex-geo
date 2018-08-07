@@ -11,6 +11,6 @@ return array(
     'Yandex\\Geo\\Exception\\CurlError' => $baseDir . '/src/Yandex/Geo/Exception/CurlError.php',
     'Yandex\\Geo\\Exception\\ServerError' => $baseDir . '/src/Yandex/Geo/Exception/ServerError.php',
     'Yandex\\Geo\\GeoObject' => $baseDir . '/src/Yandex/Geo/GeoObject.php',
-    'Yandex\\Geo\\GeocodeServiceProvider' => $baseDir . '/src/Yandex/Geo/YandexServiceProvider.php',
     'Yandex\\Geo\\Response' => $baseDir . '/src/Yandex/Geo/Response.php',
+    'Yandex\\Geo\\YandexServiceProvider' => $baseDir . '/src/Yandex/Geo/YandexServiceProvider.php',
 );
