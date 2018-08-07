@@ -3,7 +3,7 @@
     "description": "Simply service laravel Yandex Geocoding",
     "keywords": [
         "laravel",
-        "google",
+        "yandex",
         "geocode",
         "geocoding",
         "address",
