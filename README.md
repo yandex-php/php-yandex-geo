@@ -26,3 +26,13 @@ Add then alias YaGeo adding its facade to the aliases array in the same file:
 
 
 ## Usage
+
+```php
+
+dd(
+
+    \YaGeo::make()->setQuery('Киев')->load()
+
+);
+
+```
