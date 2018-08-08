@@ -6,7 +6,7 @@ use Config;
 /**
  * Class Api
  *
- * @package Yandex\Geo
+ * @package Yandex\Geocode
  *
  * @license The MIT License (MIT)
  *
@@ -37,7 +37,7 @@ class Api
      *
      * Response
      *
-     * @var \Yandex\Geo\Response|null
+     * @var \Yandex\Geocode\Response|null
      *
      */
     protected $_response;
@@ -69,6 +69,10 @@ class Api
     {
 
         ##
+        # Clear
+        #
+        $this->clear();
+        ##
         # Set language response
         #
         $this->setLang();
@@ -80,26 +84,7 @@ class Api
         # Set skip object
         #
         $this->setOffset();
-        ##
-        # Clear
-        #
-        $this->clear();
     }
-
-    /**
-     *
-     * MAKE
-     *
-     * @return OBJECT
-     *
-     */
-    public static function make()
-    {
-
-        return new static;
-
-    }
-
     /**
      *
      * Load response
@@ -146,7 +131,7 @@ class Api
 
             curl_close($curl);
 
-            throw new \Yandex\Geo\Exception\CurlError($error);
+            throw new \Yandex\Geocode\Exception\CurlError($error);
 
         }
 
@@ -156,7 +141,7 @@ class Api
 
             $msg = strip_tags($data);
 
-            throw new \Yandex\Geo\Exception\ServerError(trim($msg), $code);
+            throw new \Yandex\Geocode\Exception\ServerError(trim($msg), $code);
 
         }
 
@@ -166,11 +151,11 @@ class Api
 
             $msg = sprintf('Can\'t load data by url: %s', $apiUrl);
 
-            throw new \Yandex\Geo\Exception($msg);
+            throw new \Yandex\Geocode\Exception($msg);
 
         }
 
-        $this->_response = new \Yandex\Geo\Response($data);
+        $this->_response = new \Yandex\Geocode\Response($data);
 
         return $this;
     }
@@ -187,7 +172,7 @@ class Api
     public function getResponse()
     {
 
-        return $this->_response;
+        return $this->_response->getList();
 
     }
     /**
@@ -311,7 +296,7 @@ class Api
      * @return OBJECT
      *
      */
-    protected function setQuery($query)
+    public function setQuery($query)
     {
 
         $this->_filters['geocode'] = (string) $query;

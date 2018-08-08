@@ -5,10 +5,10 @@ namespace Yandex\Geocode\Exception;
  *
  * Class CurlError
  *
- * @package Yandex\Geo\Exception
+ * @package Yandex\Geocode\Exception
  *
  * @license The MIT License (MIT)
  */
-class CurlError extends \Yandex\Geo\Exception
+class CurlError extends \Yandex\Geocode\Exception
 {
 }

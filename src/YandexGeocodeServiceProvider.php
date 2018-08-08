@@ -28,7 +28,7 @@ class YandexGeocodeServiceProvider extends ServiceProvider
 
         $this->app->bind('yandexGeocoding', function () {
 
-            return new \Yandex\Geo\Api;
+            return new \Yandex\Geocode\Api;
         });
 
     }

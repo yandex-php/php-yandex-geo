@@ -2,112 +2,202 @@
 namespace Yandex\Geocode;
 
 /**
+ *
  * Class Response
- * @package Yandex\Geo
+ *
+ * @package Yandex\Geocode
+ *
  * @license The MIT License (MIT)
+ *
  */
 class Response
 {
     /**
-     * @var \Yandex\Geo\GeoObject[]
+     *
+     * List
+     *
+     * @var \Yandex\Geocode\GeoObject[]
+     *
      */
     protected $_list = array();
     /**
-     * @var array
+     *
+     * Data
+     *
+     * @var ARRAY
+     *
      */
     protected $_data;
-
+    /**
+     *
+     * Init class
+     *
+     * @param ARRAY $data
+     *
+     * @return VOID
+     *
+     */
     public function __construct(array $data)
     {
+
         $this->_data = $data;
+
         if (isset($data['response']['GeoObjectCollection']['featureMember'])) {
+
             foreach ($data['response']['GeoObjectCollection']['featureMember'] as $entry) {
-                $this->_list[] = new \Yandex\Geo\GeoObject($entry['GeoObject']);
+
+                $this->_list[] = new \Yandex\Geocode\GeoObject($entry['GeoObject']);
+
             }
+
         }
+
     }
 
     /**
+     *
+     * Initial data
+     *
      * Исходные данные
-     * @return array
+     *
+     * @return ARRAY
+     *
      */
     public function getData()
     {
+
         return $this->_data;
+
     }
 
     /**
-     * @return \Yandex\Geo\GeoObject[]
+     *
+     * Get list
+     *
+     * @return \Yandex\Geocode\GeoObject[]
+     *
      */
     public function getList()
     {
-        return $this->_list;
-    }
 
+        foreach ($this->_list as $list) {
+
+            return $list;
+
+        }
+
+    }
     /**
-     * @return null|GeoObject
+     *
+     * Get first
+     *
+     * @return NULL|GeoObject
+     *
      */
     public function getFirst()
     {
         $result = null;
+
         if (count($this->_list)) {
+
             $result = $this->_list[0];
+
         }
 
         return $result;
     }
-
     /**
+     *
+     * Return initial query
+     *
      * Возвращает исходный запрос
-     * @return string|null
+     *
+     * @return STRING|NULL
+     *
      */
     public function getQuery()
     {
+
         $result = null;
+
         if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['request'])) {
+
             $result = $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['request'];
+
         }
+
         return $result;
     }
-
     /**
+     *
+     * Amount found results
+     *
      * Кол-во найденных результатов
-     * @return int
+     *
+     * @return INTEGER
+     *
      */
     public function getFoundCount()
     {
-        $result = null;
-        if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'])) {
-            $result = (int) $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'];
-        }
-        return $result;
-    }
 
+        $result = null;
+
+        if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'])) {
+
+            $result = (int) $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'];
+
+        }
+
+        return $result;
+
+    }
     /**
+     *
+     * Latitude in degress. It has decimal performance with accuracy up to seven characters after comma
+     *
      * Широта в градусах. Имеет десятичное представление с точностью до семи знаков после запятой
-     * @return float|null
+     *
+     * @return FLOAT|NULL
+     *
      */
     public function getLatitude()
     {
+
         $result = null;
+
         if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos'])) {
+
             list(, $latitude) = explode(' ', $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos']);
-            $result           = (float) $latitude;
+
+            $result = (float) $latitude;
+
         }
+
         return $result;
     }
-
     /**
+     *
+     * Longitude in degress. It has decimal performance with accucary up to seven characters after comma
+     *
      * Долгота в градусах. Имеет десятичное представление с точностью до семи знаков после запятой
-     * @return float|null
+     *
+     * @return FLOAT|NULL
+     *
      */
     public function getLongitude()
     {
+
         $result = null;
+
         if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos'])) {
+
             list($longitude) = explode(' ', $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos']);
-            $result          = (float) $longitude;
+
+            $result = (float) $longitude;
+
         }
+
         return $result;
+
     }
 }
