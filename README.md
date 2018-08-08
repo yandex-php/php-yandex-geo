@@ -6,7 +6,7 @@ Simply service laravel Yandex Geocoding
 Run composer require command.
 
 ```sh
-composer require jack/laravel-yandex-geocode
+composer require jackmartin/laravel-yandex-geocode
 ```
 
 ### Laravel Setting
@@ -76,7 +76,7 @@ dd(
 Установить пакет с помощью composer
 
 ```sh
-composer require jack/laravel-yandex-geocode
+composer require jackmartin/laravel-yandex-geocode
 ```
 
 ### Laravel настройка пакета
