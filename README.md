@@ -171,7 +171,7 @@ dd(
 
 );
 ```
-##Методы
+## Методы
 
 1. Получить сырые данные ответа
     * [getRawData()](https://github.com/martinjack/laravel-yandex-geocoding#getrawdata)
