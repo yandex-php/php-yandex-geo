@@ -87,7 +87,7 @@ dd(
 7. Get name street
     * [getStreet()](https://github.com/martinjack/laravel-yandex-geocoding#getstreet)
 8. Get house number
-    * [getHouseNumber(](https://github.com/martinjack/laravel-yandex-geocoding#gethousenumber)
+    * [getHouseNumber()](https://github.com/martinjack/laravel-yandex-geocoding#gethousenumber)
 9. Get full raw address
     * [getRawFullAddress()](https://github.com/martinjack/laravel-yandex-geocoding#getrawfulladdress)
 10. Get full address
@@ -188,7 +188,7 @@ dd(
 7. Получить имя улицы
     * [getStreet()](https://github.com/martinjack/laravel-yandex-geocoding#getstreet)
 8. Получить номер дома
-    * [getHouseNumber(](https://github.com/martinjack/laravel-yandex-geocoding#gethousenumber)
+    * [getHouseNumber()](https://github.com/martinjack/laravel-yandex-geocoding#gethousenumber)
 9. Получить полный сырой адрес
     * [getRawFullAddress()](https://github.com/martinjack/laravel-yandex-geocoding#getrawfulladdress)
 10. Получить полный адрес
