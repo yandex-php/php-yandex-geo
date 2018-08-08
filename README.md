@@ -70,7 +70,7 @@ dd(
 );
 ```
 
-##Methods
+## Methods
 
 1. Get raw data response
     * [getRawData()](https://github.com/martinjack/laravel-yandex-geocoding#getrawdata)
