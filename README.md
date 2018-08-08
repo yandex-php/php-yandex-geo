@@ -15,13 +15,13 @@ composer require jackmartin/laravel-yandex-geocode
 
 After updating composer, register the service provider in bootstrap\app.php
 ```php
-Yandex\Geocode\YandexServiceProvider::class
+Yandex\Geocode\YandexGeocodeServiceProvider::class
 ```
 
 Add then alias YaGeo adding its facade to the aliases array in the same file:
 
 ```php
-'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacades::class
+'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacade::class
 ```
 
 ### Lumen Setting
@@ -29,12 +29,23 @@ Add then alias YaGeo adding its facade to the aliases array in the same file:
 After updating composer, register the service provider in bootstrap/app.php
 
 ```php
-$app->register(Yandex\Geocode\YandexServiceProvider::class);
+$app->register(Yandex\Geocode\YandexGeocodeServiceProvider::class);
 ```
 
 ## Configuration parameters package
 
 Api page: https://tech.yandex.ru/maps/doc/geocoder/desc/concepts/input_params-docpage/
+
+### Copy file config yandex-geocoding.php in config folder
+```sh
+php artisan vendor:publish
+```
+Select Tag: yandex-geocoding-config
+
+or
+```sh
+php artisan vendor:publish --provider="Yandex\Geocode\YandexGeocodeServiceProvider" --tag="yandex-geocoding-config"
+```
 
 #### Api key
 
@@ -117,13 +128,13 @@ composer require jackmartin/laravel-yandex-geocode
 После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
 
 ```php
-Yandex\Geocode\YandexServiceProvider::class
+Yandex\Geocode\YandexGeocodeServiceProvider::class
 ```
 
 Затем для быстрого вызов класса пакета, добавьте псевдоним в этот же файле:
 
 ```php
-'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacades::class
+'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacade::class
 ```
 
 ### Lumen настройка пакета
@@ -131,12 +142,23 @@ Yandex\Geocode\YandexServiceProvider::class
 После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
 
 ```php
-Yandex\Geocode\YandexServiceProvider::class
+Yandex\Geocode\YandexGeocodeServiceProvider::class
 ```
 
 ## Настройка параметров пакета
 
 Документация: https://tech.yandex.ru/maps/doc/geocoder/desc/concepts/input_params-docpage/
+
+### Копируем файл настроек yandex-geocondig.php в config папку
+```sh
+php artisan vendor:publish
+```
+Выбираем Tag: yandex-geocoding-config
+
+или
+```sh
+php artisan vendor:publish --provider="Yandex\Geocode\YandexGeocodeServiceProvider" --tag="yandex-geocoding-config"
+```
 
 #### Ключ API
 
