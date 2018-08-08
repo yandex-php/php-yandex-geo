@@ -50,6 +50,8 @@ class YandexServiceProvider extends ServiceProvider
     public function register()
     {
 
+        $source = __DIR__ . '/config/yandex-geocoding.php';
+
         $this->mergeConfigFrom($source, 'yandex-geocoding');
 
         $app->singleton('yandex-geocoding', function ($app) {
