@@ -19,7 +19,7 @@ Yandex\Geo\YandexServiceProvider::class
 Add then alias YaGeo adding its facade to the aliases array in the same file:
 
 ```php
-'YaGeo' => Yandex\Geo\YandexServiceProvider::class
+'YaGeo' => Yandex\Geo\Facades\YandexGeocodeFacades::class
 ```
 
 ### Lumen Setting
@@ -90,7 +90,7 @@ Yandex\Geo\YandexServiceProvider::class
 Затем для быстрого вызов класса пакета, добавьте псевдоним в этот же файле:
 
 ```php
-'YaGeo' => Yandex\Geo\YandexServiceProvider::class
+'YaGeo' => Yandex\Geo\Facades\YandexGeocodeFacades::class
 ```
 
 ### Lumen настройка пакета
