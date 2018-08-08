@@ -3,7 +3,7 @@ namespace Yandex\Geo\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class YaGeo extends Facade
+class YandexGeocodeFacades extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,7 +13,7 @@ class YaGeo extends Facade
     protected static function getFacadeAccessor()
     {
 
-        return 'yandex-geocoding';
+        return 'yandexGeocoding';
 
     }
 

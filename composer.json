@@ -33,7 +33,7 @@
                 "Yandex\\Geo\\YandexServiceProvider"
             ],
             "aliases": {
-                "YaGeo": "Yandex\\Geo\\Facades\\YaGeo"
+                "YaGeo": "Yandex\\Geo\\Facades\\YandexGeocodeFacades"
             }
         }
     }

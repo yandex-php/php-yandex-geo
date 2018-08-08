@@ -37,7 +37,7 @@ class YandexServiceProvider extends ServiceProvider
 
         } elseif ($this->app instanceof LumenApplication) {
 
-            $this->app->configure('yandex-geocoding');
+            $this->app->configure('yandexGeocoding');
 
         }
 
@@ -50,7 +50,7 @@ class YandexServiceProvider extends ServiceProvider
     public function register()
     {
 
-        $this->app->bind('yandex-geocoding', function () {
+        $this->app->bind('yandexGeocoding', function () {
 
             return new Api;
 
