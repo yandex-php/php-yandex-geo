@@ -54,7 +54,7 @@ class YandexServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom($source, 'yandex-geocoding');
 
-        $app->singleton('yandex-geocoding', function ($app) {
+        $this->app->singleton('yandex-geocoding', function ($app) {
 
             return new Api(['1']);
 
