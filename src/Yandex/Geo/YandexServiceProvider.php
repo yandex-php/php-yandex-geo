@@ -90,7 +90,7 @@ class YandexServiceProvider extends ServiceProvider
 
             $config = (array) $app['config']['yandex-geocoding'];
 
-            return (new Api($config))->setContainer($app);
+            return (new Api($config));
 
         });
 

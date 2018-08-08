@@ -3,19 +3,47 @@ namespace Yandex\Geo;
 
 /**
  * Class Api
+ *
  * @package Yandex\Geo
+ *
  * @license The MIT License (MIT)
+ *
  * @see http://api.yandex.ru/maps/doc/geocoder/desc/concepts/About.xml
+ *
  */
 class Api
 {
-    /** дом */
+    /**
+     *
+     * House
+     *
+     * Дом
+     *
+     */
     const KIND_HOUSE = 'house';
-    /** улица */
+    /**
+     *
+     * Street
+     *
+     * Улица
+     *
+     */
     const KIND_STREET = 'street';
-    /** станция метро */
+    /**
+     *
+     * Station subway
+     *
+     * Станция метро
+     *
+     */
     const KIND_METRO = 'metro';
-    /** район города */
+    /**
+     *
+     * District city
+     *
+     * Район города
+     *
+     */
     const KIND_DISTRICT = 'district';
     /** населенный пункт (город/поселок/деревня/село/...) */
     const KIND_LOCALITY = 'locality';
@@ -32,15 +60,29 @@ class Api
     /** турецкий (только для карты Турции) */
     const LANG_TR = 'tr-TR';
     /**
-     * @var string Версия используемого api
+     *
+     * Version API
+     *
+     * @var STRING Version use API
+     * @var STRING Версия используемого api
+     *
      */
     protected $_version = '1.x';
     /**
-     * @var array
+     *
+     * Filter
+     *
+     * @var ARRAY Filter parameters
+     * @var ARRAY Фильтр параметров
+     *
      */
     protected $_filters = array();
     /**
+     *
+     * Response
+     *
      * @var \Yandex\Geo\Response|null
+     *
      */
     protected $_response;
     /**
@@ -55,23 +97,43 @@ class Api
      *
      * LANGUAGE RESPONSE
      *
-     * @var STRING
+     * @var STRING Language response
+     * @var STRING Язык ответа
      *
      */
-    private $language = '';
+    private $language = 'ru_RU';
+    /**
+     *
+     * Config
+     *
+     * @var ARRAY Config default
+     * @var ARRAY Настройка по умолчанию
+     *
+     */
+    private $config = array();
 
     /**
-     * @param null|string $version
+     *
+     * Init class
+     *
+     * @param STRING $config
+     *
      */
-    public function __construct($version = null)
+    public function __construct($config)
     {
 
-        if (!empty($version)) {
-
-            $this->_version = (string) $version;
-
-        }
-
+        $this->config = $config;
+        ##
+        # Set language response
+        #
+        $this->setLang();
+        ##
+        # Set api key
+        #
+        $this->setToken();
+        ##
+        # Clear
+        #
         $this->clear();
     }
 
@@ -90,38 +152,73 @@ class Api
     }
 
     /**
+     *
+     * Load response
+     *
+     * Загрузка ответа
+     *
      * @param array $options Curl options
+     *
      * @return $this
+     *
      * @throws Exception
+     *
      * @throws Exception\CurlError
+     *
      * @throws Exception\ServerError
+     *
      */
     public function load(array $options = [])
     {
+
         $apiUrl = sprintf('https://geocode-maps.yandex.ru/%s/?%s', $this->_version, http_build_query($this->_filters));
-        $curl   = curl_init($apiUrl);
+
+        $curl = curl_init($apiUrl);
+
         $options += array(
+
             CURLOPT_RETURNTRANSFER => 1,
+
             CURLOPT_HTTPGET        => 1,
+
             CURLOPT_FOLLOWLOCATION => 1,
+
         );
+
         curl_setopt_array($curl, $options);
+
         $data = curl_exec($curl);
+
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
         if (curl_errno($curl)) {
+
             $error = curl_error($curl);
+
             curl_close($curl);
+
             throw new \Yandex\Geo\Exception\CurlError($error);
+
         }
+
         curl_close($curl);
+
         if (in_array($code, array(500, 502))) {
+
             $msg = strip_tags($data);
+
             throw new \Yandex\Geo\Exception\ServerError(trim($msg), $code);
+
         }
+
         $data = json_decode($data, true);
+
         if (empty($data)) {
+
             $msg = sprintf('Can\'t load data by url: %s', $apiUrl);
+
             throw new \Yandex\Geo\Exception($msg);
+
         }
 
         $this->_response = new \Yandex\Geo\Response($data);
@@ -130,143 +227,266 @@ class Api
     }
 
     /**
+     *
+     * Get response
+     *
+     * Получение ответа
+     *
      * @return Response
+     *
      */
     public function getResponse()
     {
-        return $this->_response;
-    }
 
+        return $this->_response;
+
+    }
     /**
+     * Clear filters geocoding
+     *
      * Очистка фильтров гео-кодирования
-     * @return self
+     *
+     * @return OBJECT
+     *
      */
     public function clear()
     {
+
         $this->_filters = array(
+
             'format' => 'json',
+
         );
-        // указываем явно значения по-умолчанию
+
         $this
             ->setLang(self::LANG_RU)
             ->setOffset(0)
             ->setLimit(10);
-//            ->useAreaLimit(false);
+
         $this->_response = null;
+
         return $this;
     }
 
     /**
+     *
+     * Geocoding by cordinates
+     *
      * Гео-кодирование по координатам
-     * @see http://api.yandex.ru/maps/doc/geocoder/desc/concepts/input_params.xml#geocode-format
-     * @param float $longitude Долгота в градусах
-     * @param float $latitude Широта в градусах
-     * @return self
+     *
+     * @see    http://api.yandex.ru/maps/doc/geocoder/desc/concepts/input_params.xml#geocode-format
+     *
+     * @param FLOAT $longitude Долгота в градусах
+     *
+     * @param FLOAT $latitude Широта в градусах
+     *
+     * @return OBJECT
+     *
      */
     public function setPoint($longitude, $latitude)
     {
-        $longitude                 = (float) $longitude;
-        $latitude                  = (float) $latitude;
+
+        $longitude = (float) $longitude;
+
+        $latitude = (float) $latitude;
+
         $this->_filters['geocode'] = sprintf('%F,%F', $longitude, $latitude);
+
         return $this;
+
     }
 
     /**
+     *
+     * Geographical region search object
+     *
      * Географическая область поиска объекта
-     * @param float $lengthLng Разница между максимальной и минимальной долготой в градусах
-     * @param float $lengthLat Разница между максимальной и минимальной широтой в градусах
-     * @param null|float $longitude Долгота в градусах
-     * @param null|float $latitude Широта в градусах
-     * @return self
+     *
+     * @param FLOAT $lengthLng Разница между максимальной и минимальной долготой в градусах
+     *
+     * @param FLOAT $lengthLat Разница между максимальной и минимальной широтой в градусах
+     *
+     * @param NULL|FLOAT $longitude Долгота в градусах
+     *
+     * @param NULL|FLOAT $latitude Широта в градусах
+     *
+     * @return OBJECT
+     *
      */
     public function setArea($lengthLng, $lengthLat, $longitude = null, $latitude = null)
     {
-        $lengthLng             = (float) $lengthLng;
-        $lengthLat             = (float) $lengthLat;
+
+        $lengthLng = (float) $lengthLng;
+
+        $lengthLat = (float) $lengthLat;
+
         $this->_filters['spn'] = sprintf('%f,%f', $lengthLng, $lengthLat);
+
         if (!empty($longitude) && !empty($latitude)) {
-            $longitude            = (float) $longitude;
-            $latitude             = (float) $latitude;
+
+            $longitude = (float) $longitude;
+
+            $latitude = (float) $latitude;
+
             $this->_filters['ll'] = sprintf('%f,%f', $longitude, $latitude);
+
         }
+
         return $this;
     }
 
     /**
+     *
+     * Allow limit search objects by regions, given self::setArea()
+     *
      * Позволяет ограничить поиск объектов областью, заданной self::setArea()
-     * @param boolean $areaLimit
-     * @return self
+     *
+     * @param BOOLEAN $areaLimit
+     *
+     * @return OBJECT
+     *
      */
+
     public function useAreaLimit($areaLimit)
     {
+
         $this->_filters['rspn'] = $areaLimit ? 1 : 0;
+
         return $this;
+
     }
 
     /**
+     *
+     * Geocoding by query (address/coordinates)
+     *
      * Гео-кодирование по запросу (адрес/координаты)
-     * @param string $query
-     * @return self
+     *
+     * @param STRING $query
+     *
+     * @return OBJECT
+     *
      */
     public function setQuery($query)
     {
-        $this->_filters['geocode'] = (string) $query;
-        return $this;
-    }
 
+        $this->_filters['geocode'] = (string) $query;
+
+        return $this;
+
+    }
     /**
+     *
+     * View toponyms (only for reverse geocoding)
+     *
      * Вид топонима (только для обратного геокодирования)
-     * @param string $kind
-     * @return self
+     *
+     * @param STRING $kind
+     *
+     * @return OBJECT
+     *
      */
     public function setKind($kind)
     {
-        $this->_filters['kind'] = (string) $kind;
-        return $this;
-    }
 
+        $this->_filters['kind'] = (string) $kind;
+
+        return $this;
+
+    }
     /**
+     *
+     * Maximum amount return objects (default 10)
+     *
      * Максимальное количество возвращаемых объектов (по-умолчанию 10)
-     * @param int $limit
-     * @return self
+     *
+     * @param INTEGER $limit
+     *
+     * @return OBJECT
+     *
      */
     public function setLimit($limit)
     {
-        $this->_filters['results'] = (int) $limit;
-        return $this;
-    }
 
+        $this->_filters['results'] = (int) $limit;
+
+        return $this;
+
+    }
     /**
+     *
+     * Amount objects in response (start with first), which is necessary skip
+     *
      * Количество объектов в ответе (начиная с первого), которое необходимо пропустить
-     * @param int $offset
-     * @return self
+     *
+     * @param INTEGER $offset
+     *
+     * @return OBJECT
+     *
      */
     public function setOffset($offset)
     {
+
         $this->_filters['skip'] = (int) $offset;
-        return $this;
-    }
 
+        return $this;
+
+    }
     /**
+     *
+     * Preferred language description objects
+     *
      * Предпочитаемый язык описания объектов
-     * @param string $lang
-     * @return self
+     *
+     * @param STRING $lang
+     *
+     * @return OBJECT
+     *
      */
-    public function setLang($lang)
+    public function setLang()
     {
-        $this->_filters['lang'] = (string) $lang;
-        return $this;
+
+        if (isset($this->config['language'])) {
+
+            if ($this->config['language'] != '') {
+
+                $this->_filters['lang'] = (string) $this->config['lang'];
+
+            }
+
+        } else {
+
+            $this->_filters['lang'] = (string) $this->language;
+
+        }
+
     }
 
     /**
+     *
+     * Key api Yandex.Maps
+     *
      * Ключ API Яндекс.Карт
+     *
      * @see http://api.yandex.ru/maps/form.xml
+     *
      * @param string $token
+     *
      * @return self
+     *
      */
-    public function setToken($token)
+    public function setToken()
     {
-        $this->_filters['key'] = (string) $token;
-        return $this;
+
+        if (isset($this->config['api_key'])) {
+
+            if ($this->config['api_key']) {
+
+                $this->_filters['key'] = (string) $this->config['api_key'];
+
+            }
+
+        }
+
     }
 }
