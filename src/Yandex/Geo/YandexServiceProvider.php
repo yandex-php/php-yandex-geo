@@ -4,7 +4,6 @@ namespace Yandex\Geo;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
-use Yandex\Geo\Api;
 
 class YandexServiceProvider extends ServiceProvider
 {
@@ -12,14 +11,16 @@ class YandexServiceProvider extends ServiceProvider
     /**
      * Indicates if loading of the provider is deferred.
      *
-     * @var bool
+     * @var BOOL
+     *
      */
     protected $defer = true;
 
     /**
      * Bootstrap the configuration
      *
-     * @return void
+     * @return VOID
+     *
      */
     public function boot()
     {
@@ -45,14 +46,15 @@ class YandexServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      *
-     * @return void
+     * @return VOID
+     *
      */
     public function register()
     {
 
         $this->app->bind('yandexGeocoding', function () {
 
-            return new Api;
+            return new \Yandex\Geo\Api;
 
         });
 
