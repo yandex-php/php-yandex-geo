@@ -31,7 +31,7 @@ class YandexServiceProvider extends ServiceProvider
             $this->publishes(
 
                 [$source => config_path('yandex-geocoding.php')],
-                'config'
+                'yandex-geocode-config'
 
             );
 
@@ -50,26 +50,11 @@ class YandexServiceProvider extends ServiceProvider
     public function register()
     {
 
-        $source = __DIR__ . '/config/yandex-geocoding.php';
+        $this->app->bind('yandex-geocoding', function () {
 
-        $this->mergeConfigFrom($source, 'yandex-geocoding');
-
-        $this->app->singleton('yandex-geocoding', function ($app) {
-
-            return new Api(['1']);
+            return new Api;
 
         });
-
-    }
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-
-        return ['yandex-geocoding'];
 
     }
 

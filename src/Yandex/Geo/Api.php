@@ -1,6 +1,8 @@
 <?php
 namespace Yandex\Geo;
 
+use Config;
+
 /**
  * Class Api
  *
@@ -13,52 +15,6 @@ namespace Yandex\Geo;
  */
 class Api
 {
-    /**
-     *
-     * House
-     *
-     * Дом
-     *
-     */
-    const KIND_HOUSE = 'house';
-    /**
-     *
-     * Street
-     *
-     * Улица
-     *
-     */
-    const KIND_STREET = 'street';
-    /**
-     *
-     * Station subway
-     *
-     * Станция метро
-     *
-     */
-    const KIND_METRO = 'metro';
-    /**
-     *
-     * District city
-     *
-     * Район города
-     *
-     */
-    const KIND_DISTRICT = 'district';
-    /** населенный пункт (город/поселок/деревня/село/...) */
-    const KIND_LOCALITY = 'locality';
-    /** русский (по умолчанию) */
-    const LANG_RU = 'ru-RU';
-    /** украинский */
-    const LANG_UA = 'uk-UA';
-    /** белорусский */
-    const LANG_BY = 'be-BY';
-    /** американский английский */
-    const LANG_US = 'en-US';
-    /** британский английский */
-    const LANG_BR = 'en-BR';
-    /** турецкий (только для карты Турции) */
-    const LANG_TR = 'tr-TR';
     /**
      *
      * Version API
@@ -104,25 +60,14 @@ class Api
     private $language = 'ru_RU';
     /**
      *
-     * Config
-     *
-     * @var ARRAY Config default
-     * @var ARRAY Настройка по умолчанию
-     *
-     */
-    private $config = array();
-
-    /**
-     *
      * Init class
      *
      * @param STRING $config
      *
      */
-    public function __construct($config = array())
+    public function __construct()
     {
 
-        $this->config = $config;
         ##
         # Set language response
         #
@@ -428,10 +373,9 @@ class Api
 
         if (!$offset) {
 
-            if (isset($this->config['skip_object'])) {
+            if (config('yandex-geocoding.skip_object')) {
 
-                $this->_filters['skip'] = (int) $this->config['skip_object'];
-
+                $this->_filters['skip'] = (int) config('yandex-geocoding.skip_object');
             }
 
         } else {
@@ -457,13 +401,9 @@ class Api
     public function setLang()
     {
 
-        if (isset($this->config['language'])) {
+        if (config('yandex-geocoding.language')) {
 
-            if ($this->config['language'] != '') {
-
-                $this->_filters['lang'] = (string) $this->config['language'];
-
-            }
+            $this->_filters['lang'] = (string) config('yandex-geocoding.language');
 
         } else {
 
@@ -489,13 +429,9 @@ class Api
     public function setToken()
     {
 
-        if (isset($this->config['api_key'])) {
+        if (config('yandex-geocoding.api_key')) {
 
-            if ($this->config['api_key']) {
-
-                $this->_filters['key'] = (string) $this->config['api_key'];
-
-            }
+            $this->_filters['key'] = (string) config('yandex-geocoding.api_key');
 
         }
 
