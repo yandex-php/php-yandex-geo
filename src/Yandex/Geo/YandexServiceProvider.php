@@ -25,7 +25,7 @@ class YandexServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $source = __DIR__ . '/config/yandex-geocoding.php';
+        $source = __DIR__ . '/../config/yandex-geocoding.php';
 
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
 
