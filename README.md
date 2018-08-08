@@ -15,13 +15,13 @@ composer require jackmartin/laravel-yandex-geocode
 
 After updating composer, register the service provider in bootstrap\app.php
 ```php
-Yandex\Geo\YandexServiceProvider::class
+Yandex\Geocode\YandexServiceProvider::class
 ```
 
 Add then alias YaGeo adding its facade to the aliases array in the same file:
 
 ```php
-'YaGeo' => Yandex\Geo\Facades\YandexGeocodeFacades::class
+'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacades::class
 ```
 
 ### Lumen Setting
@@ -29,7 +29,7 @@ Add then alias YaGeo adding its facade to the aliases array in the same file:
 After updating composer, register the service provider in bootstrap/app.php
 
 ```php
-$app->register(Yandex\Geo\YandexServiceProvider::class);
+$app->register(Yandex\Geocode\YandexServiceProvider::class);
 ```
 
 ## Configuration parameters package
@@ -117,13 +117,13 @@ composer require jackmartin/laravel-yandex-geocode
 После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
 
 ```php
-Yandex\Geo\YandexServiceProvider::class
+Yandex\Geocode\YandexServiceProvider::class
 ```
 
 Затем для быстрого вызов класса пакета, добавьте псевдоним в этот же файле:
 
 ```php
-'YaGeo' => Yandex\Geo\Facades\YandexGeocodeFacades::class
+'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacades::class
 ```
 
 ### Lumen настройка пакета
@@ -131,7 +131,7 @@ Yandex\Geo\YandexServiceProvider::class
 После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
 
 ```php
-Yandex\Geo\YandexServiceProvider::class
+Yandex\Geocode\YandexServiceProvider::class
 ```
 
 ## Настройка параметров пакета
