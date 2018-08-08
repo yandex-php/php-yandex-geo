@@ -132,6 +132,10 @@ class Api
         #
         $this->setToken();
         ##
+        # Set skip object
+        #
+        $this->setOffset();
+        ##
         # Clear
         #
         $this->clear();
@@ -424,10 +428,22 @@ class Api
      * @return OBJECT
      *
      */
-    public function setOffset($offset)
+    public function setOffset($offset = 0)
     {
 
-        $this->_filters['skip'] = (int) $offset;
+        if (!$offset) {
+
+            if (isset($this->config['skip_object'])) {
+
+                $this->_filters['skip'] = (int) $this->config['skip_object'];
+
+            }
+
+        } else {
+
+            $this->_filters['skip'] = (int) $offset;
+
+        }
 
         return $this;
 
@@ -450,7 +466,7 @@ class Api
 
             if ($this->config['language'] != '') {
 
-                $this->_filters['lang'] = (string) $this->config['lang'];
+                $this->_filters['lang'] = (string) $this->config['language'];
 
             }
 
