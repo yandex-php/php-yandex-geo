@@ -1,5 +1,5 @@
-# Laravel Yandex Geocodig
-Simply package laravel Yandex Geocoding
+# Laravel Yandex.Geocodig
+Simply package laravel Yandex.Geocoding
 
 [![Latest Stable Version](https://poser.pugx.org/jackmartin/laravel-yandex-geocode/v/stable)](https://packagist.org/packages/jackmartin/laravel-yandex-geocode) [![Total Downloads](https://poser.pugx.org/jackmartin/laravel-yandex-geocode/downloads)](https://packagist.org/packages/jackmartin/laravel-yandex-geocode) [![License](https://poser.pugx.org/jackmartin/laravel-yandex-geocode/license)](https://packagist.org/packages/jackmartin/laravel-yandex-geocode)
 
@@ -100,9 +100,9 @@ dd(
     * [getType()](https://github.com/martinjack/laravel-yandex-geocoding#gettype)
 
 
-# Laravel Яндекс Геокодирование
+# Laravel Яндекс.Геокодирование
 
-Простой пакет laravel Яндекс Геокодирование
+Простой пакет laravel Яндекс.Геокодирование
 
 ## Установка
 
