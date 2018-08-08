@@ -81,7 +81,7 @@ composer require jackmartin/laravel-yandex-geocode
 
 ### Laravel настройка пакета
 
-После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле boostrap/app.php:
+После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
 
 ```php
 Yandex\Geo\YandexServiceProvider::class
@@ -95,7 +95,7 @@ Yandex\Geo\YandexServiceProvider::class
 
 ### Lumen настройка пакета
 
-После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле boostrap/app.php:
+После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
 
 ```php
 Yandex\Geo\YandexServiceProvider::class
