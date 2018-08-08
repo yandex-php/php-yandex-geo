@@ -119,7 +119,7 @@ class Api
      * @param STRING $config
      *
      */
-    public function __construct($config)
+    public function __construct($config = array())
     {
 
         $this->config = $config;
@@ -261,11 +261,6 @@ class Api
             'format' => 'json',
 
         );
-
-        $this
-            ->setLang(self::LANG_RU)
-            ->setOffset(0)
-            ->setLimit(10);
 
         $this->_response = null;
 
