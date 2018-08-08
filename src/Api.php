@@ -383,18 +383,28 @@ class Api
      * @return OBJECT
      *
      */
-    public function setLang()
+    public function setLang($language = '')
     {
 
-        if (config('yandex-geocoding.language')) {
+        if ($language == '') {
 
-            $this->_filters['lang'] = (string) config('yandex-geocoding.language');
+            if (config('yandex-geocoding.language')) {
+
+                $this->_filters['lang'] = (string) config('yandex-geocoding.language');
+
+            } else {
+
+                $this->_filters['lang'] = (string) $this->language;
+
+            }
 
         } else {
 
-            $this->_filters['lang'] = (string) $this->language;
+            $this->_filters['lang'] = (string) $language;
 
         }
+
+        return $this;
 
     }
 
@@ -419,6 +429,8 @@ class Api
             $this->_filters['key'] = (string) config('yandex-geocoding.api_key');
 
         }
+
+        return $this;
 
     }
 }
