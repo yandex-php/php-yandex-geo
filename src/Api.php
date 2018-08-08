@@ -311,7 +311,7 @@ class Api
      * @return OBJECT
      *
      */
-    public function setQuery($query)
+    protected function setQuery($query)
     {
 
         $this->_filters['geocode'] = (string) $query;

@@ -30,6 +30,7 @@ class YandexGeocodeServiceProvider extends ServiceProvider
 
             return new \Yandex\Geo\Api;
         });
+
     }
 
 }
