@@ -205,78 +205,104 @@ dd(
 ### getRawData() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getRawData();
 ```
 ### getData() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getData();
 ```
 ### getCountry() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getCountry();
 ```
 ### getRegion() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getCountry();
 ```
 ### getDistrict() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getDistrict();
 ```
 ### getLocality() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getLocality();
 ```
 ### getStreet() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getStreet();
 ```
 ### getHouseNumber() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getHouseNumber();
 ```
 ### getRawFullAddress() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getRawFullAddress();
 ```
 ### getFullAddress() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getFullAddress();
 ```
 ### getLatitude() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getLatitude();
 ```
 ### getLongitude() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getLongitude();
 ```
 ### getType() ###
 ```php
 use YaGeo;
+
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
+
 $data = $data->getResponse()->getType();
 ```
