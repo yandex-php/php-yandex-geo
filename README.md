@@ -1,6 +1,8 @@
 # Laravel Yandex Geocodig
 Simply service laravel Yandex Geocoding
 
+[![Latest Stable Version](https://poser.pugx.org/jackmartin/laravel-yandex-geocode/v/stable)](https://packagist.org/packages/jackmartin/laravel-yandex-geocode) [![Total Downloads](https://poser.pugx.org/jackmartin/laravel-yandex-geocode/downloads)](https://packagist.org/packages/jackmartin/laravel-yandex-geocode) [![License](https://poser.pugx.org/jackmartin/laravel-yandex-geocode/license)](https://packagist.org/packages/jackmartin/laravel-yandex-geocode)
+
 ## Installation 
 
 Run composer require command.
@@ -71,31 +73,31 @@ dd(
 ##Methods
 
 1. Get raw data response
-    *
+    * [getRawData()](https://github.com/martinjack/laravel-yandex-geocoding#getrawdata)
 2. Get data response
-    *
+    * [getData()](https://github.com/martinjack/laravel-yandex-geocoding#getdata)
 3. Get name country
-    *
+    * [getCountry()](https://github.com/martinjack/laravel-yandex-geocoding#getcountry)
 4. Get name region
-    *
+    * [getRegion()](https://github.com/martinjack/laravel-yandex-geocoding#getregion)
 5. Get name district
-    *
+    * [getDistrict()](https://github.com/martinjack/laravel-yandex-geocoding#getdistrict)
 6. Get name locality
-    *
+    * [getLocality()](https://github.com/martinjack/laravel-yandex-geocoding#getlocality)
 7. Get name street
-    *
+    * [getStreet()](https://github.com/martinjack/laravel-yandex-geocoding#getstreet)
 8. Get house number
-    *
+    * [getHouseNumber(](https://github.com/martinjack/laravel-yandex-geocoding#gethousenumber)
 9. Get full raw address
-    *
+    * [getRawFullAddress()](https://github.com/martinjack/laravel-yandex-geocoding#getrawfulladdress)
 10. Get full address
-    *
+    * [getFullAddress()](https://github.com/martinjack/laravel-yandex-geocoding#getfulladdress)
 11. Get latitude
-    *
+    * [getLatitude()](https://github.com/martinjack/laravel-yandex-geocoding#getlatitude)
 12. Get longitude
-    *
+    * [getLongitude()](https://github.com/martinjack/laravel-yandex-geocoding#getlongitude)
 13. Get type
-    *
+    * [getType()](https://github.com/martinjack/laravel-yandex-geocoding#gettype)
 
 
 # Laravel Яндекс Геокодирование
@@ -172,35 +174,35 @@ dd(
 ##Методы
 
 1. Получить сырые данные ответа
-    *
+    * [getRawData()](https://github.com/martinjack/laravel-yandex-geocoding#getrawdata)
 2. Получить данные ответа 
-    *
+    * [getData()](https://github.com/martinjack/laravel-yandex-geocoding#getdata)
 3. Получить имя страны
-    *
+    * [getCountry()](https://github.com/martinjack/laravel-yandex-geocoding#getcountry)
 4. Получить имя области
-    *
+    * [getRegion()](https://github.com/martinjack/laravel-yandex-geocoding#getregion)
 5. Получить имя района
-    *
+    * [getDistrict()](https://github.com/martinjack/laravel-yandex-geocoding#getdistrict)
 6. Получить имя населенного пункта
-    *
+    * [getLocality()](https://github.com/martinjack/laravel-yandex-geocoding#getlocality)
 7. Получить имя улицы
-    *
+    * [getStreet()](https://github.com/martinjack/laravel-yandex-geocoding#getstreet)
 8. Получить номер дома
-    *
+    * [getHouseNumber(](https://github.com/martinjack/laravel-yandex-geocoding#gethousenumber)
 9. Получить полный сырой адрес
-    *
+    * [getRawFullAddress()](https://github.com/martinjack/laravel-yandex-geocoding#getrawfulladdress)
 10. Получить полный адрес
-    *
+    * [getFullAddress()](https://github.com/martinjack/laravel-yandex-geocoding#getfulladdress)
 11. Получить широту
-    *
+    * [getLatitude()](https://github.com/martinjack/laravel-yandex-geocoding#getlatitude)
 12. Получить долготу
-    *
+    * [getLongitude()](https://github.com/martinjack/laravel-yandex-geocoding#getlongitude)
 13. Получить тип
-    *
+    * [getType()](https://github.com/martinjack/laravel-yandex-geocoding#gettype)
 
-#Methods - Методы:
+# Methods - Методы:
 
-### getRawData ###
+### getRawData() ###
 ```php
 use YaGeo;
 $data = YaGeo::setQuery('Kiev, Vishnevoe, Lesi Ukrainki, 57')->load();
