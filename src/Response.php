@@ -1,5 +1,5 @@
 <?php
-namespace Yandex\Geo;
+namespace Yandex\Geocode;
 
 /**
  * Class Response
@@ -78,7 +78,7 @@ class Response
     {
         $result = null;
         if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'])) {
-            $result = (int)$this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'];
+            $result = (int) $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'];
         }
         return $result;
     }
@@ -91,8 +91,8 @@ class Response
     {
         $result = null;
         if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos'])) {
-            list(,$latitude) = explode(' ', $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos']);
-            $result = (float)$latitude;
+            list(, $latitude) = explode(' ', $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos']);
+            $result           = (float) $latitude;
         }
         return $result;
     }
@@ -105,8 +105,8 @@ class Response
     {
         $result = null;
         if (isset($this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos'])) {
-            list($longitude,) = explode(' ', $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos']);
-            $result = (float)$longitude;
+            list($longitude) = explode(' ', $this->_data['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['Point']['pos']);
+            $result          = (float) $longitude;
         }
         return $result;
     }

@@ -1,4 +1,4 @@
-<?php namespace Yandex\Geo;
+<?php namespace Yandex\Geocode;
 
 use Illuminate\Support\ServiceProvider;
 

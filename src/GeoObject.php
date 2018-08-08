@@ -1,5 +1,5 @@
 <?php
-namespace Yandex\Geo;
+namespace Yandex\Geocode;
 
 /**
  * Class GeoObject
@@ -9,13 +9,13 @@ namespace Yandex\Geo;
 class GeoObject
 {
     protected $_addressHierarchy = [
-        'Country' => array('AdministrativeArea'),
-        'AdministrativeArea' => array('SubAdministrativeArea', 'Locality'),
+        'Country'               => array('AdministrativeArea'),
+        'AdministrativeArea'    => array('SubAdministrativeArea', 'Locality'),
         'SubAdministrativeArea' => array('Locality'),
-        'Locality' => array('DependentLocality', 'Thoroughfare'),
-        'DependentLocality' => array('DependentLocality', 'Thoroughfare'),
-        'Thoroughfare' => array('Premise'),
-        'Premise' => array(),
+        'Locality'              => array('DependentLocality', 'Thoroughfare'),
+        'DependentLocality'     => array('DependentLocality', 'Thoroughfare'),
+        'Thoroughfare'          => array('Premise'),
+        'Premise'               => array(),
     ];
     protected $_data;
     protected $_rawData;
@@ -24,7 +24,7 @@ class GeoObject
     {
         $data = array(
             'Address' => $rawData['metaDataProperty']['GeocoderMetaData']['text'],
-            'Kind' => $rawData['metaDataProperty']['GeocoderMetaData']['kind']
+            'Kind'    => $rawData['metaDataProperty']['GeocoderMetaData']['kind'],
         );
         array_walk_recursive(
             $rawData,
@@ -47,11 +47,11 @@ class GeoObject
             }
         );
         if (isset($rawData['Point']['pos'])) {
-            $pos = explode(' ', $rawData['Point']['pos']);
-            $data['Longitude'] = (float)$pos[0];
-            $data['Latitude'] = (float)$pos[1];
+            $pos               = explode(' ', $rawData['Point']['pos']);
+            $data['Longitude'] = (float) $pos[0];
+            $data['Latitude']  = (float) $pos[1];
         }
-        $this->_data = $data;
+        $this->_data    = $data;
         $this->_rawData = $rawData;
     }
 
@@ -212,7 +212,7 @@ class GeoObject
             return;
         }
 
-        $nameProp = $levelName === 'Premise' ? 'PremiseNumber' : $levelName.'Name';
+        $nameProp = $levelName === 'Premise' ? 'PremiseNumber' : $levelName . 'Name';
         if (isset($level[$nameProp])) {
             $address[] = $level[$nameProp];
         }

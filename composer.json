@@ -24,16 +24,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Yandex\\Geo\\": "src/"
+            "Yandex\\Geocode\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Yandex\\Geo\\YandexServiceProvider"
+                "Yandex\\Geocode\\YandexGeocodeServiceProvider"
             ],
             "aliases": {
-                "YaGeo": "Yandex\\Geo\\Facades\\YandexGeocodeFacades"
+                "YaGeo": "Yandex\\Geocode\\Facades\\YandexGeocodeFacades"
             }
         }
     }

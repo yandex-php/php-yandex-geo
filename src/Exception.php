@@ -1,5 +1,5 @@
 <?php
-namespace Yandex\Geo;
+namespace Yandex\Geocode;
 
 /**
  * Class Exception
