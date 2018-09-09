@@ -24,14 +24,6 @@ Add then alias YaGeo adding its facade to the aliases array in the same file:
 'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacade::class
 ```
 
-### Lumen Setting
-
-After updating composer, register the service provider in bootstrap/app.php
-
-```php
-$app->register(Yandex\Geocode\YandexGeocodeServiceProvider::class);
-```
-
 ## Configuration parameters package
 
 Api page: https://tech.yandex.ru/maps/doc/geocoder/desc/concepts/input_params-docpage/
@@ -135,14 +127,6 @@ Yandex\Geocode\YandexGeocodeServiceProvider::class
 
 ```php
 'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacade::class
-```
-
-### Lumen настройка пакета
-
-После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
-
-```php
-Yandex\Geocode\YandexGeocodeServiceProvider::class
 ```
 
 ## Настройка параметров пакета
