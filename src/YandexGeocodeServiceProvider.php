@@ -15,7 +15,16 @@ class YandexGeocodeServiceProvider extends ServiceProvider
 
         $configPath = __DIR__ . '/config/yandex-geocoding.php';
 
-        $this->publishes([$configPath => config_path('yandex-geocoding.php')], 'yandex-geocoding-config');
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
+
+            $this->publishes([$configPath => config_path('yandex-geocoding.php')], 'yandex-geocoding-config');
+
+        } elseif ($this->app instanceof LumenApplication) {
+
+            $this->app->configure('yandexGeocoding');
+
+        }
+
     }
 
     /**
