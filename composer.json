@@ -19,6 +19,7 @@
             "email": "killfess@gmail.com"
         }
     ],
+    "homepage": "https://github.com/martinjack/laravel-yandex-geocoding",
     "require": {
         "php": ">=7.0.0"
     },

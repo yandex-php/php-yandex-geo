@@ -19,7 +19,6 @@ Yandex\Geocode\YandexGeocodeServiceProvider::class
 ```
 
 Add then alias YaGeo adding its facade to the aliases array in the same file:
-
 ```php
 'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacade::class
 ```
@@ -118,13 +117,11 @@ composer require jackmartin/laravel-yandex-geocode
 ### Laravel настройка пакета
 
 После установки пакета с помощью composer, зарегистрируйте сервис пакета в файле bootstrap/app.php:
-
 ```php
 Yandex\Geocode\YandexGeocodeServiceProvider::class
 ```
 
 Затем для быстрого вызов класса пакета, добавьте псевдоним в этот же файле:
-
 ```php
 'YaGeo' => Yandex\Geocode\Facades\YandexGeocodeFacade::class
 ```
