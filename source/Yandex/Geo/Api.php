@@ -226,13 +226,13 @@ class Api
 
     /**
      * Ключ API Яндекс.Карт
-     * @see http://api.yandex.ru/maps/form.xml
+     * @see https://tech.yandex.ru/maps/doc/geocoder/desc/concepts/input_params-docpage
      * @param string $token
      * @return self
      */
     public function setToken($token)
     {
-        $this->_filters['key'] = (string)$token;
+        $this->_filters['apikey'] = (string)$token;
         return $this;
     }
 }
