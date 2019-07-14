@@ -89,6 +89,9 @@ class Api
             $msg = sprintf('Can\'t load data by url: %s', $apiUrl);
             throw new \Yandex\Geo\Exception($msg);
         }
+        if (!empty($data['error'])) {
+            throw new \Yandex\Geo\Exception\MapsError($data['error']['message'], $data['error']['code']);
+        }
 
         $this->_response = new \Yandex\Geo\Response($data);
 
