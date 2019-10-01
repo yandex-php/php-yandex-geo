@@ -61,6 +61,7 @@ class Api
      * @throws Exception
      * @throws Exception\CurlError
      * @throws Exception\ServerError
+     * @throws Exception\MapsError
      */
     public function load(array $options = [])
     {
@@ -90,7 +91,11 @@ class Api
             throw new \Yandex\Geo\Exception($msg);
         }
         if (!empty($data['error'])) {
-            throw new \Yandex\Geo\Exception\MapsError($data['error']['message'], $data['error']['code']);
+            if (!empty($data['statusCode']) AND !empty($data['error'])) {
+                throw new \Yandex\Geo\Exception\MapsError($data['error'], $data['statusCode']);
+            } else{
+                throw new \Yandex\Geo\Exception\MapsError($data['error']['message'], $data['error']['code']);
+            }
         }
 
         $this->_response = new \Yandex\Geo\Response($data);
