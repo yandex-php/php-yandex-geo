@@ -26,6 +26,7 @@ $api->setQuery('Тверская 6');
 $api
     ->setLimit(1) // кол-во результатов
     ->setLang(\Yandex\Geo\Api::LANG_US) // локаль ответа
+    ->setToken(<Ваш api ключ>) // api ключ
     ->load();
 
 $response = $api->getResponse();
