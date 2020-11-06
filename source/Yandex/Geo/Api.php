@@ -17,6 +17,8 @@ class Api
     const KIND_METRO = 'metro';
     /** район города */
     const KIND_DISTRICT = 'district';
+    /** район области */
+    const KIND_AREA = 'area';
     /** населенный пункт (город/поселок/деревня/село/...) */
     const KIND_LOCALITY = 'locality';
     /** русский (по умолчанию) */
