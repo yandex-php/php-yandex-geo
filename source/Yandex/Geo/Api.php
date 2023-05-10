@@ -92,6 +92,9 @@ class Api
         if (!empty($data['error'])) {
             if (is_array($data['error'])) {
                 throw new \Yandex\Geo\Exception\MapsError($data['error']['message'], $data['error']['code']);
+            } else if (!empty($data['message'])) {
+                $code = !empty($data['statusCode']) ? $data['statusCode'] : 0;
+                throw new \Yandex\Geo\Exception\MapsError($data['message'], $code);
             } else {
                 throw new \Yandex\Geo\Exception\MapsError($data['error']);
             }
